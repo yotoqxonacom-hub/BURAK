@@ -8,3 +8,7 @@ function getReversedString(str: string): string {
 
 const result = getReversedString("Hello World");
 console.log(result); // Output: "olleH dlroW"
+
+// Architectural pattern: model-view-controller (MVC),  (DI) Dependency Injection, --> backend
+// Architectural pattern:mvp, --> frontend
+// Design pattern : middleware,  decorator pattern
