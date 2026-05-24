@@ -13,7 +13,8 @@
         }
     },
     "include": [
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "train.ts"
     ],
     "exclude": [
         "node_modules"
