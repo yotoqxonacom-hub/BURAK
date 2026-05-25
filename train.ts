@@ -1,13 +1,27 @@
+console.log("==============================");
 console.log("MITASKs have been done:");
-console.log("=======================");
+console.log("==============================");
 
-//MITASK M  
-function getSquareNumber(numbers: [2, 4, 6]) {
-    return numbers.map(num => num * num)
+function palindromCheck(word: string): boolean {
+    let reversed = word.split("").reverse().join("");
+    return word === reversed;
 }
 
-const result = getSquareNumber([2, 4, 6]);
+const result = palindromCheck("dod");
 console.log("result:", result);
+
+const result1 = palindromCheck("Ali");
+console.log("result1:", result1);
+
+
+
+//MITASK M
+//function getSquareNumber(numbers: [2, 4, 6]) {
+// return numbers.map(num => num * num)
+//}
+
+//const result = getSquareNumber([2, 4, 6]);
+//console.log("result:", result);
 
 
 // MITASK L
