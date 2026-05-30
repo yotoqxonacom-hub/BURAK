@@ -2,6 +2,7 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
+//MITASK N
 function palindromCheck(word: string): boolean {
     let reversed = word.split("").reverse().join("");
     return word === reversed;
@@ -38,3 +39,13 @@ console.log("result1:", result1);
 // Architectural pattern: model-view-controller (MVC),  (DI) Dependency Injection, --> backend
 // Architectural pattern:mvp, --> frontend
 // Design pattern : middleware,  decorator pattern
+
+/* Project standarts:
+- Logging standarts
+- Naming standarts
+     function, methods, variables ==>CAMEL
+     class ==> Paskal
+     folders ==> kebab
+     css ==> Snake
+     Error handling
+ */
