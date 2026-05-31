@@ -12,8 +12,8 @@ export enum HttpCode {
 export enum Message {
     SOMETHING_WENT_WRONG = "somthing went wrong!",
     NO_DATA_FOUND = "no data is found",
-    CREATE_FAILED = "create is failed",
-    UPDATE_FAILED = "update is failed"
+    CREATE_FAILED = "creating is failed",
+    UPDATE_FAILED = "updating is failed"
 }
 
 class Errors extends Error {
