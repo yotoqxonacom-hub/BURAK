@@ -2,17 +2,34 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
-//MITASK N
-function palindromCheck(word: string): boolean {
-    let reversed = word.split("").reverse().join("");
-    return word === reversed;
+//MITASK O
+
+function calculateSumOfNumbers(arr: any[]): number {
+    return arr.reduce((sum, item) => {
+        if (typeof item === "number") {
+            return sum + item;
+        }
+        return sum;
+    }, 0);
 }
 
-const result = palindromCheck("dod");
-console.log("result:", result);
+// Misol:
+const result = calculateSumOfNumbers([15, "10", { son: 23 }, true, 95]);
+console.log("Natija:", result); // Natija: 110
 
-const result1 = palindromCheck("Ali");
-console.log("result1:", result1);
+// Natija:
+
+//MITASK N
+//function palindromCheck(word: string): boolean {
+// let reversed = word.split("").reverse().join("");
+// return word === reversed;
+//}
+
+//const result = palindromCheck("dod");
+//console.log("result:", result);
+
+//const result1 = palindromCheck("Ali");
+//console.log("result1:", result1);
 
 
 
@@ -48,4 +65,10 @@ console.log("result1:", result1);
      folders ==> kebab
      css ==> Snake
      Error handling
+ */
+
+/*
+1 - Traditional API
+2 - Rest API
+3 - GraphQL API
  */
