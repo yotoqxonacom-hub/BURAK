@@ -25,3 +25,10 @@ export interface MemberInput {
     memberImage?: string;
     memberPoints?: number;
 }
+
+
+// objectning key qismini string qilinsa json form bo'larkan..
+export interface LoginInput {
+    memberNick: string;
+    memberPassword: string;
+}
