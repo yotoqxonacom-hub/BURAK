@@ -16,7 +16,7 @@ export enum Message {
     UPDATE_FAILED = "updating is failed!",
 
     USED_NICK_PHONE = "this nickname or phone is already used!",
-    NO_MEMEER_NICK = "no member with this nickname!",
+    NO_MEMBER_NICK = "no member with this nickname!",
     WRONG_PASSWORD = "wrong password! please try again!",
 }
 
