@@ -2,20 +2,36 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
-//MITASK O
+//MITASK P
 
-function calculateSumOfNumbers(arr: any[]): number {
-    return arr.reduce((sum, item) => {
-        if (typeof item === "number") {
-            return sum + item;
-        }
-        return sum;
-    }, 0);
+function objectToArray(obj: Record<string, any>): [string, any][] {
+    return Object.entries(obj);
 }
 
 // Misol:
-const result = calculateSumOfNumbers([15, "10", { son: 23 }, true, 95]);
-console.log("Natija:", result); // Natija: 110
+const result = objectToArray({ a: 546, b: 29 });
+console.log("result:", result);
+
+
+
+
+
+
+
+//MITASK O
+
+//function calculateSumOfNumbers(arr: any[]): number {
+//   return arr.reduce((sum, item) => {
+//      if (typeof item === "number") {
+//            return sum + item;
+//     }
+//     return sum;
+//  }, 0);
+//}
+
+// Misol:
+//const result = calculateSumOfNumbers([15, "10", { son: 23 }, true, 95]);
+//console.log("Natija:", result); // Natija: 110
 
 // Natija:
 
