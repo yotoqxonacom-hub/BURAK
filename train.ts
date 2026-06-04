@@ -88,3 +88,8 @@ console.log("result:", result);
 2 - Rest API
 3 - GraphQL API
  */
+
+/*
+Traditional fd => SSR => EJS
+Modern FD => SPA => React
+ */
