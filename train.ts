@@ -2,15 +2,28 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
-//MITASK P
+//MITASK Q
 
-function objectToArray(obj: Record<string, any>): [string, any][] {
-    return Object.entries(obj);
+function hasProperty(obj: object, str: string): boolean {
+    return str in obj;
 }
 
+const result1 = hasProperty({ name: "BMW", model: "M3" }, "model");
+console.log("result1:", result1);
+
+const result2 = hasProperty({ name: "BMW", model: "M3" }, "year");
+console.log("result2:", result2);
+
+
+//MITASK P
+
+//function objectToArray(obj: Record<string, any>): [string, any][] {
+//return Object.entries(obj);
+//}
+
 // Misol:
-const result = objectToArray({ a: 546, b: 29 });
-console.log("result:", result);
+//const result = objectToArray({ a: 546, b: 29 });
+//console.log("result:", result);
 
 
 
