@@ -4,15 +4,16 @@ console.log("==============================");
 
 //MITASK Q
 
-function hasProperty(obj: object, str: string): boolean {
-    return str in obj;
-}
+//function hasProperty(obj: object, str: string): boolean {
+//   return str in obj;
+//}
 
-const result1 = hasProperty({ name: "BMW", model: "M3" }, "model");
-console.log("result1:", result1);
+//const result1 = hasProperty({ name: "BMW", model: "M3" }, "model");
+//console.log("result1:", result1);
 
-const result2 = hasProperty({ name: "BMW", model: "M3" }, "year");
-console.log("result2:", result2);
+//const result2 = hasProperty({ name: "BMW", model: "M3" }, "year");
+//console.log("result2:", result2);
+
 
 
 //MITASK P
