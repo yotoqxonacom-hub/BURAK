@@ -2,6 +2,15 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
+// MITASK R
+
+function calculateString(str: string): number {
+    return str.split("").reduce((sum, char) => sum + Number(char), 0);
+}
+const result = calculateString("12345");
+console.log("result:", result);
+
+
 //MITASK Q
 
 //function hasProperty(obj: object, str: string): boolean {
