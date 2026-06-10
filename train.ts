@@ -2,13 +2,30 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
+//MISTASK S
+
+
+
+function missingNumber(nums: number[]) {
+    let count = 0;
+    for (let i = 0; i <= nums.length; i++) {
+        if (!nums.includes(i)) {
+            return i;
+        }
+    }
+}
+
+console.log(missingNumber([0, 1, 3, 4])); // Output: 2
+
+
+
 // MITASK R
 
-function calculateString(str: string): number {
-    return str.split("").reduce((sum, char) => sum + Number(char), 0);
-}
-const result = calculateString("12345");
-console.log("result:", result);
+//function calculateString(str: string): number {
+//return str.split("").reduce((sum, char) => sum + Number(char), 0);
+//}
+//const result = calculateString("12345");
+//console.log("result:", result);
 
 
 //MITASK Q

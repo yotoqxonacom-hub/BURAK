@@ -2,7 +2,8 @@ import express from "express";
 const routerAdmin = express.Router();
 import restaurantController from "./controllers/restaurant.controllers";
 import productController from "./controllers/product.controllers";
-
+import makeUploader from "./libs/utils/uploader";
+import multer from "multer";
 
 /* Restaurant */
 routerAdmin.get('/', restaurantController.goHome);
@@ -24,6 +25,7 @@ routerAdmin.get('/product/all',
     productController.getAllProducts)
     .post('/product/create',
         restaurantController.verifyRestaurant,
+        makeUploader("products").single("productImage"),
         productController.createNewProducts)
     .put('/product/:id',
         restaurantController.verifyRestaurant,
