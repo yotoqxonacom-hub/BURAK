@@ -19,9 +19,15 @@ routerAdmin
     .get('/logout', restaurantController.logout);
 
 /* Producty */
-routerAdmin.get('/product/all', productController.getAllProducts)
-    .post('/product/create', productController.createNewProducts)
-    .put('/product/:id', productController.updateChosenProducts);
+routerAdmin.get('/product/all',
+    restaurantController.verifyRestaurant,
+    productController.getAllProducts)
+    .post('/product/create',
+        restaurantController.verifyRestaurant,
+        productController.createNewProducts)
+    .put('/product/:id',
+        restaurantController.verifyRestaurant,
+        productController.updateChosenProducts);
 /* User */
 
 export default routerAdmin;
