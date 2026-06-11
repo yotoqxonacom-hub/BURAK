@@ -1,22 +1,18 @@
 // Member service model to'g'ridan to'g'ri controllerlar bilan ishlaydi
 // Va biz ularni doim CLASS lar bilam tashkil qilamiz.
-
 import MemberModel from "../schema/Member.model";
-import { LoginInput, Member, MemberInput } from "../libs/types/member";
+import { MemberInput, Member } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { MemberType } from "../libs/enums/member.enum";
-import * as bcrypt from "bcryptjs";
+import { LoginInput } from "../libs/types/member";
+import * as bcrypt from "bcryptjs"
 class MemberService {
-    private readonly memberModel: typeof MemberModel;
+    private readonly memberModel;
     constructor() {
         this.memberModel = MemberModel;
     }
-
-    /*
-    SPA
-    */
-
-    public async Signup(input: MemberInput): Promise<Member> {
+    /**SPA */
+    public async signup(input: MemberInput): Promise<Member> {
         const salt = await bcrypt.genSalt();
         input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
         try {
@@ -28,45 +24,38 @@ class MemberService {
             throw new Errors(HttpCode.BAD_REQUEST, Message.USED_NICK_PHONE);
         }
     }
-
-
-    public async Login(input: LoginInput): Promise<Member> {
-        //TODO: consider member status
+    public async login(input: LoginInput): Promise<Member> {
+        // TODO: Consider member status later
         const member = await this.memberModel
             .findOne(
                 { memberNick: input.memberNick },
-                { memberPassword: 1, memberNick: 1 })
+                { memberNick: 1, memberPassword: 1 }
+            )
             .exec();
         if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
-
-        const isMatch = await bcrypt.compare(input.memberPassword, member.memberPassword);
+        const isMatch = await bcrypt.compare(
+            input.memberPassword,
+            member.memberPassword
+        );
         if (!isMatch) {
-            throw new Errors(HttpCode.UNAUTHORIZATED, Message.WRONG_PASSWORD);
+            throw new Errors(
+                HttpCode.UNAUTHORIZATED,
+                Message.WRONG_PASSWORD
+            );
         }
-
-        return await this.memberModel
-            .findById(member._id)
-            .lean()
-            .exec();
+        return await this.memberModel.findById(member._id).lean().exec();
     }
-
-
-
-
-
-    /*
-    SSR
-     */
-
+    /**SSR */
     public async processSignup(input: MemberInput): Promise<Member> {
         const exist = await this.memberModel
             .findOne({ memberType: MemberType.RESTAURANT })
             .exec();
+        console.log("exist:", exist);
         if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
-
+        //console.log("before:", input.memberPassword);
         const salt = await bcrypt.genSalt();
         input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
-
+        // console.log("after:", input.memberPassword);
         try {
             const result = await this.memberModel.create(input);
             result.memberPassword = "";
@@ -75,26 +64,22 @@ class MemberService {
             throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
         }
     }
-
     public async processLogin(input: LoginInput): Promise<Member> {
         const member = await this.memberModel
             .findOne(
                 { memberNick: input.memberNick },
-                { memberPassword: 1, memberNick: 1 })
+                { memberNick: 1, memberPassword: 1 }
+            )
             .exec();
         if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
-
-        const isMatch = await bcrypt.compare(input.memberPassword, member.memberPassword);
+        const isMatch = await bcrypt.compare(
+            input.memberPassword,
+            member.memberPassword
+        );
         if (!isMatch) {
             throw new Errors(HttpCode.UNAUTHORIZATED, Message.WRONG_PASSWORD);
         }
-
-        return await this.memberModel
-            .findById(member._id)
-            .exec();
+        return await this.memberModel.findById(member._id).exec();
     }
-
-
 }
 export default MemberService;
-

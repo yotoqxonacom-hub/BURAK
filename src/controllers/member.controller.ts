@@ -11,14 +11,14 @@ const memberService = new MemberService();
 
 const memberController: T = {};
 
-memberController.Signup = async (req: Request, res: Response) => {
+memberController.signup = async (req: Request, res: Response) => {
     try {
         console.log("Signup")
         console.log("body:", req.body);
         // TODO: tokens, cookies, sessions, etc.
 
         const input: MemberInput = req.body,
-            result: Member = await memberService.Signup(input);
+            result: Member = await memberService.signup(input);
         res.json({ member: result });
     } catch (err) {
         console.log("Error, signup:", err);
@@ -27,11 +27,11 @@ memberController.Signup = async (req: Request, res: Response) => {
     }
 };
 
-memberController.Login = async (req: Request, res: Response) => {
+memberController.login = async (req: Request, res: Response) => {
     try {
         console.log("Login")
         const input: LoginInput = req.body,
-            result = await memberService.Login(input);
+            result = await memberService.login(input);
         // TODO: tokens, cookies, sessions, etc.
 
         res.json({ member: result });
