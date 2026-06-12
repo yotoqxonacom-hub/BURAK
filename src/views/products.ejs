@@ -4,6 +4,13 @@
         <div>PRODUCT page</div>
         <div>
             <%= member.memberNick %>
+
+                <% products.map((value, key)=> {%>
+                    <p>
+                        <%= value.productName %> -
+                            <%= value.productSize %>
+                    </p>
+                    <% })%>
         </div>
     </body>
 
