@@ -2,20 +2,30 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
-//MISTASK S
+//MITASK S
 
-
-
-function missingNumber(nums: number[]) {
-    let count = 0;
-    for (let i = 0; i <= nums.length; i++) {
-        if (!nums.includes(i)) {
-            return i;
-        }
-    }
+function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
+    const merged = [...arr1, ...arr2]; // ikkala arrayni qo‘shib yuboramiz
+    return merged.sort((a, b) => a - b); // sonlarni tartiblaymiz
 }
 
-console.log(missingNumber([0, 1, 3, 4])); // Output: 2
+// Misol:
+const result = mergeSortedArrays([0, 3, 4, 31], [4, 6, 30])
+console.log("result:", result);
+
+
+//MISTASK S
+
+//function missingNumber(nums: number[]) {
+//   let count = 0;
+//   for (let i = 0; i <= nums.length; i++) {
+//      if (!nums.includes(i)) {
+//          return i;
+//      }
+//   }
+//}
+
+//console.log(missingNumber([0, 1, 3, 4])); // Output: 2
 
 
 
