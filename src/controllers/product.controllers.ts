@@ -33,8 +33,9 @@ productController.createNewProduct = async (req: AdminRequest, res: Response) =>
             throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED)
 
         const data: ProductInput = req.body;
-        data.productImage = req.files?.map(ele => {
-            return ele.path;//replace(/\\/g, "/");
+        data.productImage = req.files?.map((file: any) => {
+            return (file.path as string).replace(/\\/g, "/");
+
         });
         console.log(req.files)
         await productService.createNewProduct(data);
@@ -53,6 +54,11 @@ productController.createNewProduct = async (req: AdminRequest, res: Response) =>
 productController.updateChosenProduct = async (req: Request, res: Response) => {
     try {
         console.log("updateChosenProduct");
+        const id = req.params.id as string;
+
+        const result = await productService.updateChosenProduct(id, req.body);
+
+        res.status(HttpCode.OK).json({ data: result });
     } catch (err) {
         console.log("Error, updateChosenProduct:", err);
         if (err instanceof Errors) res.status(err.code).json(err);
