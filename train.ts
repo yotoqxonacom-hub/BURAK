@@ -2,16 +2,37 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
-//MITASK T
+//MITASK U
 
-function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
-    const merged = [...arr1, ...arr2]; // ikkala arrayni qo‘shib yuboramiz
-    return merged.sort((a, b) => a - b); // sonlarni tartiblaymiz
+function sumOdds(n: number): number {
+    let count = 0;
+    for (let i = 1; i < n; i++) {
+        if (i % 2 !== 0) {
+            count++;
+        }
+    }
+    return count;
 }
 
+
+const result1 = sumOdds(9);
+console.log(result1);
+
+const result2 = sumOdds(11);
+console.log(result2);
+
+
+
+//MITASK T
+
+//function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
+// const merged = [...arr1, ...arr2]; // ikkala arrayni qo‘shib yuboramiz
+// return merged.sort((a, b) => a - b); // sonlarni tartiblaymiz
+//}
+
 // Misol:
-const result = mergeSortedArrays([0, 3, 4, 31], [4, 6, 30])
-console.log("result:", result);
+//const result = mergeSortedArrays([0, 3, 4, 31], [4, 6, 30])
+//console.log("result:", result);
 
 
 //MISTASK S
