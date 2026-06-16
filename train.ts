@@ -2,7 +2,7 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
-//MITASK S
+//MITASK T
 
 function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
     const merged = [...arr1, ...arr2]; // ikkala arrayni qo‘shib yuboramiz
