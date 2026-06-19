@@ -2,24 +2,46 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
-//MITASK U
+//MITASK V
 
-function sumOdds(n: number): number {
-    let count = 0;
-    for (let i = 1; i < n; i++) {
-        if (i % 2 !== 0) {
-            count++;
+function countChars(str: string): { [key: string]: number } {
+    const result: { [key: string]: number } = {};
+
+    for (const char of str) {
+        if (result[char]) {
+            result[char] += 1;
+        } else {
+            result[char] = 1;
         }
     }
-    return count;
+
+    return result;
 }
 
+const result = countChars(" cut to the chase");
+console.log("result:", result);;
 
-const result1 = sumOdds(9);
-console.log(result1);
 
-const result2 = sumOdds(11);
-console.log(result2);
+
+
+//MITASK U
+
+//function sumOdds(n: number): number {
+//   let count = 0;
+//   for (let i = 1; i < n; i++) {
+//      if (i % 2 !== 0) {
+//        count++;
+//    }
+// }
+// return count;
+//}
+
+
+//const result1 = sumOdds(9);
+//console.log(result1);
+
+//const result2 = sumOdds(11);
+//console.log(result2);
 
 
 
