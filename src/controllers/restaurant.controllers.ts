@@ -41,6 +41,7 @@ restaurantController.processSignup = async (req: AdminRequest, res: Response) =>
     try {
         console.log("processSignup");
         const file = req.file;
+        console.log(req.body);
         if (!file) throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG)
         const newMember: MemberInput = req.body;
         newMember.memberImage = file?.path.replace(/\\/g, "/");
@@ -56,7 +57,7 @@ restaurantController.processSignup = async (req: AdminRequest, res: Response) =>
         const message =
             err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
         res.send(
-            `<script> alert ("${message}"); window.location.replace('admin/signup)</script>`
+            `<script> alert ("${message}"); window.location.replace('/admin/signup')</script>`
         );
     }
 };
@@ -79,7 +80,7 @@ restaurantController.processLogin = async (
         const message =
             err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
         res.send(
-            `<script> alert ("${message}"); window.location.replace('admin/login)</script>`
+            `<script> alert ("${message}"); window.location.replace('/admin/login')</script>`
         );
     }
 };
