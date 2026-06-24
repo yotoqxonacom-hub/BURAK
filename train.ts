@@ -2,24 +2,41 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
-//MITASK V
+//MITASK W
 
-function countChars(str: string): { [key: string]: number } {
-    const result: { [key: string]: number } = {};
-
-    for (const char of str) {
-        if (result[char]) {
-            result[char] += 1;
-        } else {
-            result[char] = 1;
-        }
+function chunkArray<T>(arr: T[], size: number): T[][] {
+    const result: T[][] = [];
+    for (let i = 0; i < arr.length; i += size) {
+        result.push(arr.slice(i, i + size));
     }
-
     return result;
 }
 
-const result = countChars(" cut to the chase");
-console.log("result:", result);;
+// Misol:
+const result = chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
+console.log("result:", result);
+
+
+
+
+//MITASK V
+
+//function countChars(str: string): { [key: string]: number } {
+// const result: { [key: string]: number } = {};
+
+//   for (const char of str) {
+//      if (result[char]) {
+//          result[char] += 1;
+//     } else {
+//         result[char] = 1;
+//    }
+// }
+
+// return result;
+//}
+
+//const result = countChars(" cut to the chase");
+//console.log("result:", result);;
 
 
 
