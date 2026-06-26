@@ -2,19 +2,44 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
-//MITASK W
+//MITASK X
 
-function chunkArray<T>(arr: T[], size: number): T[][] {
-    const result: T[][] = [];
-    for (let i = 0; i < arr.length; i += size) {
-        result.push(arr.slice(i, i + size));
+
+function countOccurrences(obj: any, str: string) {
+    let count = 0;
+    if (typeof obj === "object" && obj !== null) {
+        for (let key in obj) {
+            if (key === str) {
+                count++;
+            }
+            if (typeof obj[key] === "object" && obj[key] !== null) {
+                count += countOccurrences(obj[key], str);
+            }
+        }
     }
-    return result;
+    return count;
 }
 
+const result = countOccurrences(
+    { model: "Bugatti", steer: { model: "HANKOOK", size: 30 } },
+    "model",
+);
+
+console.log("result:", result)
+
+//MITASK W
+
+//function chunkArray<T>(arr: T[], size: number): T[][] {
+// const result: T[][] = [];
+// for (let i = 0; i < arr.length; i += size) {
+//    result.push(arr.slice(i, i + size));
+//   }
+//   return result;
+//}
+
 // Misol:
-const result = chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
-console.log("result:", result);
+//const result = chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
+//console.log("result:", result);
 
 
 
