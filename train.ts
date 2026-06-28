@@ -2,6 +2,17 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
+//MITASK Y
+
+function findIntersection<T>(arr1: T[], arr2: T[]): T[] {
+    return arr1.filter(item => arr2.includes(item));
+}
+
+// Misol:
+const result = findIntersection([8, 5, 3], [3, 5, 9]); // [2, 3]
+console.log("result:", result);
+
+/*
 //MITASK X
 
 
@@ -26,6 +37,7 @@ const result = countOccurrences(
 );
 
 console.log("result:", result)
+*/
 
 //MITASK W
 
