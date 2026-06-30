@@ -2,6 +2,25 @@ console.log("==============================");
 console.log("MITASKs have been done:");
 console.log("==============================");
 
+
+//MITASK Z
+
+function sumEvens(arr: number[]): number {
+    let sum = 0;
+    for (const num of arr) {
+        if (num % 2 === 0) {
+            sum += num;
+        }
+    }
+    return sum;
+}
+
+// Misol:
+const result = sumEvens([5, 6, 8, 9, 10]);
+console.log("result:", result)
+
+
+/*
 //MITASK Y
 
 function findIntersection<T>(arr1: T[], arr2: T[]): T[] {
@@ -11,6 +30,14 @@ function findIntersection<T>(arr1: T[], arr2: T[]): T[] {
 // Misol:
 const result = findIntersection([8, 5, 3], [3, 5, 9]); // [2, 3]
 console.log("result:", result);
+
+function theSame<T>(arr1: T[], arr2: T[]): T[] {
+    return arr1.filter(item => arr2.includes(item));
+}
+const result1 = theSame(['a', 'v', ' s', 'd', 'f'], ['a', 'b', 'v', 's',]);
+console.log("result1:", result1);
+
+
 
 /*
 //MITASK X
