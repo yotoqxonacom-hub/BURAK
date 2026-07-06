@@ -15,7 +15,7 @@ class AuthService {
       const duration = `${AUTH_TIMER}h`;
       jwt.sign(
         payoad,
-        process.env.SECRET_TOKEN as string,
+        this.secretToken,
         { expiresIn: duration },
         (err, token) => {
           if (err)

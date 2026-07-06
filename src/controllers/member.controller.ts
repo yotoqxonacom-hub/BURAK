@@ -45,6 +45,7 @@ memberController.login = async (req: Request, res: Response) => {
       //TOKENS AUTHENTICATION
       token = await authService.createToken(result);
     //console.log("token=>", token);
+    console.log("result=>", result);
 
     res.cookie("accessToken", token, {
       maxAge: AUTH_TIMER * 3600 * 1000,

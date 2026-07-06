@@ -1,19 +1,18 @@
 import mongoose, { Schema } from "mongoose";
+import { Member } from "../libs/types/member";
 import { MemberType, MemberStatus } from "../libs/enums/member.enum";
 
-// Schema modelni 2 hil usulda qurush mumkun => 1.Schema first & 2.Code first
-
-const memberSchema = new Schema(
+const memberSchema = new Schema<Member>(
   {
     memberType: {
       type: String,
-      enum: MemberType,
+      enum: Object.values(MemberType),
       default: MemberType.USER,
     },
 
     memberStatus: {
       type: String,
-      enum: MemberStatus,
+      enum: Object.values(MemberStatus),
       default: MemberStatus.ACTIVE,
     },
 
@@ -35,24 +34,18 @@ const memberSchema = new Schema(
       required: true,
     },
 
-    memberAddress: {
-      type: String,
-    },
-
-    memberDesc: {
-      type: String,
-    },
-
-    memberImage: {
-      type: String,
-    },
+    memberAddress: String,
+    memberDesc: String,
+    memberImage: String,
 
     memberPoints: {
       type: Number,
       default: 0,
     },
   },
-  { timestamps: true }, // updatedAt, createdAt
+  {
+    timestamps: true,
+  }
 );
 
-export default mongoose.model("Member", memberSchema);
+export default mongoose.model<Member>("Member", memberSchema);

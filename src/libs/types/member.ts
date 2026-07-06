@@ -14,8 +14,8 @@ export interface Member {
   memberDesc?: string;
   memberImage?: string;
   memberPoints: number;
-  created: Date;
-  updated: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface MemberInput {
