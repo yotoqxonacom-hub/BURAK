@@ -16,6 +16,8 @@ class MemberService {
     this.memberModel = MemberModel;
   }
 
+
+
   /* SPA */
 
   public async signup(input: MemberInput): Promise<Member> {
@@ -31,11 +33,17 @@ class MemberService {
       const member = result.toObject() as Member;
       member.memberPassword = "";
       return member;
-    } catch (err) {
+    } catch (err: any) {
       console.error("Error, model:signup", err);
-      throw new Errors(HttpCode.BAD_REQUEST, Message.USED_NICK_PHONE);
+      if (err.code === 11000) {
+        // faqat duplicate bo‘lsa
+        throw new Errors(HttpCode.BAD_REQUEST, Message.USED_NICK_PHONE);
+      }
+      // boshqa xatolar uchun
+      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
     }
   }
+
 
   public async login(input: LoginInput): Promise<Member> {
     const member = await this.memberModel
@@ -89,6 +97,20 @@ class MemberService {
     }
 
     return result as Member;
+  }
+
+  public async updateMember(member: Member, input: MemberUpdateInput): Promise<Member> {
+    const memberId = shapeIntoMongooseObjectId(member._id);
+    const result = await this.memberModel
+      .findOneAndUpdate({ _id: memberId }, input, { new: true })
+      .exec();
+
+
+    if (!result) {
+      throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+    }
+
+    return result;
   }
 
   /* SSR */
