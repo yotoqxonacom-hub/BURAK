@@ -11,13 +11,19 @@ import { Types } from "mongoose";
 import { ProductStatus } from "../libs/enums/product.enum";
 import { ObjectId } from "mongoose";
 import { T } from "../libs/types/common";
+import ViewService from "./View.service";
+import { ViewGroup } from "../libs/enums/view.enum";
+import { ViewInput } from "../libs/types/view";
+
 
 class ProductService {
   private readonly productModel;
+  public viewService;
+
   constructor() {
     this.productModel = ProductModel;
+    this.viewService = new ViewService();
   }
-
   /* SPA */
 
   public async getProducts(inquiry: ProductInquiry): Promise<Product[]> {
@@ -48,18 +54,40 @@ class ProductService {
     return result;
   };
 
-  public async getProduct(memberId: ObjectId | null, id: string): Promise<Product> {
+  public async getProduct(memberId: Types.ObjectId | null, id: string): Promise<Product> {
     const productId = shapeIntoMongooseObjectId(id);
-    let result = await this.productModel.findOne(
-      { _id: productId, productStatus: ProductStatus.PROCESS },
-      //{ $inc: { productViews: 1 } },
-      //{ new: true }
-    ).lean().exec();
 
-    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    const result = await this.productModel.findOne(
+      { _id: productId, productStatus: ProductStatus.PROCESS },
+    ).exec();
+
+    if (!result) {
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    }
+
+    if (memberId) {
+      // check existence of view
+      const input: ViewInput = {
+        memberId: memberId,
+        viewRefId: productId,
+        viewGroup: ViewGroup.PRODUCT
+      };
+      const existView = await this.viewService.checkViewExistence(input);
+
+      console.log("existView:", !!existView);
+      if (!existView) {
+        //insert new view record
+        await this.viewService.insertMemberView(input);
+
+        // increment productViews
+        const result2 = await this.productModel.findOneAndUpdate(productId, { $inc: { productViews: +1 } }, { new: true }).exec();
+
+      }
+    }
 
     return result as unknown as Product;
   }
+
 
   /* SSR */
 
