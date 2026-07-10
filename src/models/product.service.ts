@@ -9,6 +9,7 @@ import Errors, { HttpCode, Message } from "../libs/Errors";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 import { Types } from "mongoose";
 import { ProductStatus } from "../libs/enums/product.enum";
+import { ObjectId } from "mongoose";
 import { T } from "../libs/types/common";
 
 class ProductService {
@@ -47,6 +48,18 @@ class ProductService {
     return result;
   };
 
+  public async getProduct(memberId: ObjectId | null, id: string): Promise<Product> {
+    const productId = shapeIntoMongooseObjectId(id);
+    let result = await this.productModel.findOne(
+      { _id: productId, productStatus: ProductStatus.PROCESS },
+      //{ $inc: { productViews: 1 } },
+      //{ new: true }
+    ).lean().exec();
+
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    return result as unknown as Product;
+  }
 
   /* SSR */
 
