@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { Member } from "../libs/types/member";
-import { Order, OrderItemInput } from "../libs/types/order";
+import { Order, OrderInquiry, OrderItemInput } from "../libs/types/order";
 import OrderModel from "../schema/Order.model";
 import OrderItemModel from "../schema/OrderItem.model";
 
@@ -44,7 +44,7 @@ class OrderService {
 
     private async recordOrderItems(orderId: Types.ObjectId, input: OrderItemInput[]): Promise<void> {
         const promisedList = input.map(async (item: OrderItemInput) => {
-            item.orderId = shapeIntoMongooseObjectId(item.orderId);
+            item.orderId = shapeIntoMongooseObjectId(orderId);
             item.productId = shapeIntoMongooseObjectId(item.productId);
             await this.orderItemModel.create(item);
             return "INSERTED";
@@ -54,6 +54,42 @@ class OrderService {
         const orderItemsState = await Promise.all(promisedList);
         console.log("orderItemsState:", orderItemsState);
 
+    }
+
+    public async getMyOrders(member: Member, inquiry: OrderInquiry): Promise<Order[]> {
+        const memberId = shapeIntoMongooseObjectId(member._id);
+        const matches = { memberId: memberId, orderStatus: inquiry.orderStatus };
+
+        const page = Number(inquiry.page);
+        const limit = Number(inquiry.limit);
+        const result = await this.orderModel
+            .aggregate([
+                { $match: matches },
+                { $sort: { updateAt: -1 } },
+                { $skip: (page - 1) * limit },
+                { $limit: limit },
+                {
+                    $lookup: {
+                        from: "orderItems",
+                        localField: "_id",
+                        foreignField: "orderId",
+                        as: "orderItems"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "products",
+                        localField: "orderItems.productId",
+                        foreignField: "_id",
+                        as: "productData"
+                    }
+                }
+
+            ])
+            .exec();
+        if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+        return result;
     }
 
 }
