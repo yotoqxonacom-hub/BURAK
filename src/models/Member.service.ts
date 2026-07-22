@@ -188,8 +188,8 @@ class MemberService {
   public async processLogin(input: LoginInput): Promise<Member> {
     const member = await this.memberModel
       .findOne(
-        { memberNick: input.memberNick },
-        { memberNick: 1, memberPassword: 1 },
+        { memberNick: input.memberNick },   // filter
+        { memberNick: 1, memberPassword: 1 },  // projection
       )
       .exec();
 

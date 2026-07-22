@@ -10,11 +10,11 @@ class AuthService {
     this.secretToken = process.env.SECRET_TOKEN as string;
   }
 
-  public async createToken(payoad: Member) {
+  public async createToken(payload: Member) {
     return new Promise((resolve, reject) => {
       const duration = `${AUTH_TIMER}h`;
       jwt.sign(
-        payoad,
+        payload,
         this.secretToken,
         { expiresIn: duration },
         (err, token) => {
