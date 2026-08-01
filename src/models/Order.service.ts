@@ -69,7 +69,7 @@ class OrderService {
         const result = await this.orderModel
             .aggregate([
                 { $match: matches },
-                { $sort: { updateAt: -1 } },
+                { $sort: { updatedAt: -1 } },
                 { $skip: (page - 1) * limit },
                 { $limit: limit },
                 {
